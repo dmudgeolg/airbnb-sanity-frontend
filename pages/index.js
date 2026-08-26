@@ -1,9 +1,16 @@
 import { sanityClient, urlFor } from "../sanity"
 import Link from "next/link"
+import { useState } from "react"
 import { isMultiple } from "../utils"
 import DashboardMap from "../components/DashboardMap"
 
 const Home = ({ properties }) => {
+  const [searchTerm, setSearchTerm] = useState("")
+
+  const filteredProperties = properties.filter((property) =>
+    property.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
   console.log(properties)
   return (
     <>
@@ -11,8 +18,17 @@ const Home = ({ properties }) => {
         <div className="main">
           <div className="feed-container">
             <h1>Places to stay near you</h1>
+            <div className="search-bar-container">
+              <input
+                type="text"
+                placeholder="Search properties by name..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="search-bar"
+              />
+            </div>
             <div className="feed">
-              {properties.map((property) => (
+              {filteredProperties.map((property) => (
                 <Link href={`property/${property.slug.current}`}>
                   <div key={property._id} className="card">
                     <img src={urlFor(property.mainImage)} />
@@ -30,7 +46,7 @@ const Home = ({ properties }) => {
             </div>
           </div>
           <div className="map">
-            <DashboardMap properties={properties} />
+            <DashboardMap properties={filteredProperties} />
           </div>
         </div>
       )}
