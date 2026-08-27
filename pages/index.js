@@ -3,13 +3,8 @@ import Link from "next/link"
 import { isMultiple } from "../utils"
 import DashboardMap from "../components/DashboardMap"
 
-const Home = ({ properties, searchTerm }) => {
+const Home = ({ properties }) => {
   console.log(properties)
-
-  const filteredProperties = properties.filter((property) =>
-    property.title.toLowerCase().includes((searchTerm || "").toLowerCase())
-  )
-
   return (
     <>
       {properties && (
@@ -17,7 +12,7 @@ const Home = ({ properties, searchTerm }) => {
           <div className="feed-container">
             <h1>Places to stay near you</h1>
             <div className="feed">
-              {filteredProperties.map((property) => (
+              {properties.map((property) => (
                 <Link href={`property/${property.slug.current}`}>
                   <div key={property._id} className="card">
                     <img src={urlFor(property.mainImage)} />
@@ -35,7 +30,7 @@ const Home = ({ properties, searchTerm }) => {
             </div>
           </div>
           <div className="map">
-            <DashboardMap properties={filteredProperties} />
+            <DashboardMap properties={properties} />
           </div>
         </div>
       )}
