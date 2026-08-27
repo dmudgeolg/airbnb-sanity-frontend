@@ -124,3 +124,24 @@ body {
 .line {
   border: 1px solid grey;
 }
+
+.search-bar-container {
+  margin: 20px 0;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 8px;
+  box-shadow: rgb(0 0 0 / 8%) 0 2px 8px;
+  font-family: 'Noto Sans JP', sans-serif;
+  box-sizing: border-box;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: rgb(255, 56, 92);
+  box-shadow: rgb(255, 56, 92 / 20%) 0 2px 8px;
+}
